@@ -1,7 +1,16 @@
 <input type="text" [formControl]="queryForm">
 <div *ngFor="let fuzzItem of filteredFuzzItems">
   <div>
-    <span class="fuzz-subject">{{ fuzzItem.subject }}</span>
+    <div>
+      <span>First Name: </span>
+      <span *ngIf="fuzzItem.key!=='firstName'">{{fuzzItem.original.firstName}}</span>
+      <da-inner-html-light
+        *ngIf="fuzzItem.key==='firstName'"
+        [text]="fuzzItem.subject"
+        [boldRanges]="fuzzItem.matchRanges"
+        class="matched-field"
+      ></da-inner-html-light>
+    </div>
     <span class="edit-distance">{{ fuzzItem.editDistance }}</span>
   </div>
 </div>

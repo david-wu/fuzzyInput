@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
+import { fakeUsers } from './fakeData/users.js';
 import { Fuzz, FuzzItem } from 'fuzz-js';
 
 @Component({
@@ -18,39 +19,7 @@ export class AppComponent {
 	public sub: Subscription;
 
 	public inputValue: string = '';
-	public availableItems: any[] = [
-		{ label: 'Apple' },
-		{ label: 'Akee' },
-		{ label: 'Apricot' },
-		{ label: 'Avocado' },
-		{ label: 'Banana' },
-		{ label: 'Bilberry' },
-		{ label: 'Blackberry' },
-		{ label: 'Blackcurrant' },
-		{ label: 'Black sapote' },
-		{ label: 'Blueberry' },
-		{ label: 'Boysenberry' },
-		{ label: 'Buddha\'s hand' },
-		{ label: 'Crab apples' },
-		{ label: 'Currant' },
-		{ label: 'Cherry' },
-		{ label: 'Cherimoya' },
-		{ label: 'Chico fruit' },
-		{ label: 'Cloudberry' },
-		{ label: 'Coconut' },
-		{ label: 'Cranberry' },
-		{ label: 'Cucumber' },
-		{ label: 'Damson' },
-		{ label: 'Date' },
-		{ label: 'Dragonfruit' },
-		{ label: 'Durian' },
-		{ label: 'Elderberry' },
-		{ label: 'Feijoa' },
-		{ label: 'Fig' },
-		{ label: 'Goji berry' },
-		{ label: 'Gooseberry' },
-		{ label: 'Grape' },
-	];
+	public fakeUsers: any[] = fakeUsers;
 
 	constructor() {
 		this.sub = this.queryForm.valueChanges.subscribe((value: string) => this.onQueryChange(value))
@@ -62,7 +31,7 @@ export class AppComponent {
 	}
 
 	public onQueryChange(query: string = '') {
-		this.filteredFuzzItems = this.fuzz.filterSort(this.availableItems, ['label'], query);
+		this.filteredFuzzItems = this.fuzz.filterSort(this.fakeUsers, ['firstName', 'lastName', 'spiritAnimal'], query);
 	}
 
 }
